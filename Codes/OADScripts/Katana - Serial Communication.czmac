@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script>
+  <Context>Zen26</Context>
+  <Version>1.0</Version>
+  <Language>Python</Language>
+  <Text># Remove all open documents
+Zen.Application.Documents.RemoveAll(False) 
+# clear console output
+Zen.Application.MacroEditor.ClearMessages()
+##
+import clr
+clr.AddReference('System')
+from System import *
+import re
+import time
+##
+serialPort = IO.Ports.SerialPort("COM6")
+serialPort.BaudRate = 115200
+serialPort.DataBits = 8
+serialPort.Close()
+serialPort.Open()
+print("Port Open")
+
+for i in range(1): 
+    
+    s1 = out_string("K?\n")
+    print("1:K? " ,str(i), s1)
+    
+    s2 = out_string("KE\n")
+    print("2:KE " ,str(i), s2)
+        
+    s3 = out_string("KS\n")
+    print("3:KS " ,str(i), s3)
+    
+    s4 = out_string("KST\n")
+    print("4:KST " ,str(i), s4)
+    
+    s5 = out_string("KT250000,100\n")
+    print("5:KT250000,100 " ,str(i), s5)
+    
+    s6 = out_string("KO40590\n")
+    print("6:KO40590 " ,str(i), s6)
+    
+    s7 = out_string("KOA120\n")
+    print("7:KOA120 " ,str(i), s7)
+    
+    s8 = out_string("KOAM\n")
+    print("8:KOAM " ,str(i), s8)
+    
+    s9 = out_string("KMS1000\n")
+    print("9:KMS1000 " ,str(i), s9)
+    
+    s10 = out_string("KKP\n")
+    print("10:KKP " ,str(i), s10)
+    
+    s11 = out_string("KKM\n")
+    print("11:KKM " ,str(i), s11)
+    
+    s12 = out_string("KRT\n")
+    print("12:KRT " ,str(i), s12)
+    
+    s13 = out_string("KI\n")
+    print("13:KI " ,str(i), s13)
+    
+    s14 = out_string("KI1\n")
+    print("14:KI1 " ,str(i), s14)
+    
+    s15 = out_string("XY23\n")
+    print("15:XY23 " ,str(i), s15)
+    
+    
+    
+serialPort.Close()    
+
+## User-defined function to output the 2nd string read from the serial buffer
+def out_string(input_str):
+    
+    output_str =""
+    
+    for i in range(2):
+        serialPort.WriteLine(input_str)
+        time.sleep(0.1)
+        output_str = serialPort.ReadExisting()
+    #print(output_str)
+    
+    return output_str        
+
+</Text>
+  <Author></Author>
+  <Description></Description>
+  <Keywords></Keywords>
+  <Row>1</Row>
+  <Column>1</Column>
+</Script>
